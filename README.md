@@ -30,9 +30,8 @@ Due to the rising seasonal epidemic of the WNV in Chicago, an increasing number 
 ### Data Provided
 * [Kaggle West Nile Virus](https://www.kaggle.com/competitions/predict-west-nile-virus/data)
 
-------
 
-## Additional sources
+### Additional sources
 * [Culex Mosquitoes](https://www.mdpi.com/2075-4450/13/9/758)
 * [How to get rid of mosquitoes without killing friendly pollinators](https://www.washingtonpost.com/home/2022/07/06/mosquito-sprays-harm-pollinators/)
 * [West Nile Virus Transmission](https://www.cdc.gov/westnile/transmission/index.html)
@@ -89,23 +88,100 @@ Due to the rising seasonal epidemic of the WNV in Chicago, an increasing number 
 |Tmax|Int|Highest temperature recorded|
 |Tmin|Int|Lowest temperature recorded|
 |Tavg|Object|Average temperature recorded|
-|Depart|Object|
-|DewPoint|Int|
-|WetBulb|Object|
-|Heat|Object|
-|Cool|Object|
-|Sunrise|Object|
-|Sunset|Object|
-|CodeSum|Object|
-|Depth|Object|
-|Water1|Object|
-|SnowFall|Object|
-|PrecipTotal|Object|
-|StnPressure|Object|
-|SeaLevel|Object|
-|ResultSpeed|Float|
-|ResultDir|Int|
-|AvgSpeed|Object|
+|Depart|Object|Difference in temperature from normal point|
+|DewPoint|Int|Temperature for air to be cooled to become water vapour|
+|WetBulb|Object|Temperature of adiabatic saturation|
+|Heat|Object|Difference in temperature from 65F (Season begins July)| 
+|Cool|Object|Difference in temperature from 65F (Season begins January)|
+|Sunrise|Object|Time of sunrise|
+|Sunset|Object|Time of sunset|
+|CodeSum|Object|Weather condition recorded|
+|Depth|Object|Depth of snowfall recorded (inches)|
+|Water1|Object|Water equivalent|
+|SnowFall|Object|Amount of snowfall recorded|
+|PrecipTotal|Object|Amount of precipitation recorded|
+|StnPressure|Object|Average station pressure|
+|SeaLevel|Object|Average sea level pressure|
+|ResultSpeed|Float|Resultant wind speed|
+|ResultDir|Int|Resultant wind direction|
+|AvgSpeed|Object|Average wind speed|
+
+#### Dataset name: spray_clean
+##### This contains the cleaned spray data.
+|Feature|Type|Description|
+|---|---|---|
+|Date|Object|Date the spraying was conducted|
+|Time|Object|Time of the spraying|
+|Latitude|Int|Latitude of the location of spraying|
+|Longitude|Int|Longitude of the location of spraying|
+
+#### Dataset name: train_df 
+##### This contains cleaned weather and train data merged together.
+|Feature|Type|Description|
+|---|---|---|
+|Date|Object|Data merged on Date column|
+|Station|Int|The station that the weather was recorded from|
+|Tmax|Int|Highest temperature recorded|
+|Tmin|Int|Lowest temperature recorded|
+|Tavg|Int|Average temperature recorded|
+|Depart|Object|Difference in temperature from normal point|
+|DewPoint|Int|Temperature for air to be cooled to become water vapour|
+|WetBulb|Int|Temperature of adiabatic saturation|
+|Heat|Int|Difference in temperature from 65F (Season begins July)| 
+|Cool|Int|Difference in temperature from 65F (Season begins January)|
+|Sunrise|Object|Time of sunrise|
+|Sunset|Object|Time of sunset|
+|CodeSum|Object|Weather condition recorded|
+|PrecipTotal|Float|Amount of precipitation recorded|
+|StnPressure|Float|Average station pressure|
+|SeaLevel|Float|Average sea level pressure|
+|ResultSpeed|Float|Resultant wind speed|
+|ResultDir|Int|Resultant wind direction|
+|AvgSpeed|Float|Average wind speed|
+|Address|Object|Approximate address of the location of the trap|
+|Species|Object|The species of the mosquitoes found in trap|
+|Block|Int|Bloack number of the address|
+|Street|Object|Street name|
+|Trap|Object|ID of the trap|
+|AddressNumberAndStreet|Object|Approximate address of the location of trap|
+|Latitude||Float|Latitude of trap|
+|Longitude|Float|Longitude of trap|
+|AddressAccuracy|Int|Accuracy of the address|
+|NumMosquitos|Int|Number of mosquitoes caught in trap|
+|WnvPresent|Int|Whether the WNV was present in the mosquitoes caught in trap. 1 indicates WNV is present. 0 indicates WNV is not present|
+
+#### Dataset name: test_df 
+##### This contains cleaned weather and test data merged together.
+|Feature|Type|Description|
+|---|---|---|
+|Date|Object|Data merged on Date column|
+|Station|Int|The station that the weather was recorded from|
+|Tmax|Int|Highest temperature recorded|
+|Tmin|Int|Lowest temperature recorded|
+|Tavg|Int|Average temperature recorded|
+|Depart|Object|Difference in temperature from normal point|
+|DewPoint|Int|Temperature for air to be cooled to become water vapour|
+|WetBulb|Int|Temperature of adiabatic saturation|
+|Heat|Int|Difference in temperature from 65F (Season begins July)| 
+|Cool|Int|Difference in temperature from 65F (Season begins January)|
+|Sunrise|Object|Time of sunrise|
+|Sunset|Object|Time of sunset|
+|CodeSum|Object|Weather condition recorded|
+|PrecipTotal|Float|Amount of precipitation recorded|
+|StnPressure|Float|Average station pressure|
+|SeaLevel|Float|Average sea level pressure|
+|ResultSpeed|Float|Resultant wind speed|
+|ResultDir|Int|Resultant wind direction|
+|AvgSpeed|Float|Average wind speed|
+|Address|Object|Approximate address of the location of the trap|
+|Species|Object|The species of the mosquitoes found in trap|
+|Block|Int|Bloack number of the address|
+|Street|Object|Street name|
+|Trap|Object|ID of the trap|
+|AddressNumberAndStreet|Object|Approximate address of the location of trap|
+|Latitude||Float|Latitude of trap|
+|Longitude|Float|Longitude of trap|
+|AddressAccuracy|Int|Accuracy of the address|
 
 
 #### Data features used in modelling
@@ -143,9 +219,19 @@ The data was very imbalanced with 95% of the total recorded mosquitoes to be neg
 More supporting data will be needed. Such data includes natural disasters, such as flooding, population density, and construction sites. Chicago had multiple floods during the duration that the data was recorded. Floods and construction sites are prone to leave pools of stagnant water which is a definitive breeding ground for mosquitoes. Such data will the team to draw trends across the years and it may explain fluctuations found during analysis.  
 
 #### Recommendations
+Monitoring the weather.
+High temperatures and high humidity are prime conditions for mosquito breeding. By monitoring the weather for these conditions it will allow for deployment of spraying of pesticides in the areas and therefore mitigate the population of the mosquitoes. 
 
+Virus prediction. 
+With the help of the model built, identifying the areas where the virus can be found allows for control measures to be placed. Spraying of pesticides around the area where the virus is detected ultimately controls the further spread of the virus. 
+
+Use of drones.
+Usage of drones will cut manpower logistic costs. It also allows for the spraying of the pesticides to be more precise and can access areas that vehicles cannot. Drones can also be deployed for trap collection and therefore allows for more consistent recording of data. 
+
+Eco-friendly pesticide
+By using eco-friendly pesticide it allows for more confidence in spraying in parks and greenery. It is also ultimately less toxic for the environment and everything in it.  
 
 #### Conclusion
-
+The team was able to achieve a model with a recall score of 96%. This led to being able to identify potential areas where the virus can be found. Control measures will be in place starting with the areas Lake Calumet, O'Hare Airport, and the Southeast of Chicago where it is a hotspot of mosquitoes and the virus. Funds can be saved with the 2-step spraying program proposed in the cost-benefit analysis that will be effectively and efficient reduce the overall mosquitoes and therefore reducing the number of mosquitoes with the virus. This thus will bring down the number of humans affected by the virus and increase the livelihood of the citizens in Chicago. 
 
 ------
