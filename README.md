@@ -1,9 +1,10 @@
 # ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Project 4a: West Nile Virus Prediction
 
 ## Notebooks
-- Part 1: Data Cleaning
-- Part 2: EDA, Visualisations, Modelling
-- Part 3: Spray Analysis and Cost-Benefit Analysis
+- 1: Data Cleaning
+- 2: EDA
+- 3: Modelling
+- 4: Spray Analysis
 
 ------
 
@@ -35,6 +36,8 @@ Due to the rising seasonal epidemic of the WNV in Chicago, an increasing number 
 * [Culex Mosquitoes](https://www.mdpi.com/2075-4450/13/9/758)
 * [How to get rid of mosquitoes without killing friendly pollinators](https://www.washingtonpost.com/home/2022/07/06/mosquito-sprays-harm-pollinators/)
 * [West Nile Virus Transmission](https://www.cdc.gov/westnile/transmission/index.html)
+* [Mosquito Control Product List](data/NorthDakotaMosquitoControlProductListTabulation2022.pdf)
+
 
 ------
 ## Data Dictionary
