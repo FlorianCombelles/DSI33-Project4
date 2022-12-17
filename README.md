@@ -1,10 +1,10 @@
 # ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Project 4a: West Nile Virus Prediction
 
 ## Notebooks
-- 1: Data Cleaning
-- 2: EDA
-- 3: Modelling
-- 4: Spray Analysis and Conclusion
+- Part 1: Data Cleaning
+- Part 2: EDA
+- Part 3: Modelling
+- Part 4: Spray Analysis and Conclusion
 
 ------
 
