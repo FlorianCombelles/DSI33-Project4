@@ -4,14 +4,14 @@
 - 1: Data Cleaning
 - 2: EDA
 - 3: Modelling
-- 4: Spray Analysis
+- 4: Spray Analysis and Conclusion
 
 ------
 
 ## Background
-West Nile Virus(WNV) is most commonly spread to humans through infected mosquitoes. Around 20% of the people who become infected witht he virus develop symptoms ranging from a persistent fever, to serious neurological illnesses that can result in death. 
+West Nile Virus(WNV) is most commonly spread to humans through infected mosquitoes. Around 20% of the people who become infected with the virus develop symptoms ranging from a persistent fever, to serious neurological illnesses that can result in death. 
 
-In 2002, the first human cases of the WNV were reported in Chicago. By 2004 the City of Chicago and the Chicago Department of Public Health(CDPH) had established a comprehensive surveilance and control program that is still in effect today. 
+In 2002, the first human case of the WNV was reported in Chicago. By 2004 the City of Chicago and the Chicago Department of Public Health(CDPH) had established a comprehensive surveilance and control program that is still in effect today. 
 
 Due to the rising seasonal epidemic of the WNV in Chicago, an increasing number of people need medical attention. As such, there is a need for better mosquito control. However, the City of Chicago can only react to the new cases and spraying pesticide is costly and must be done regularly. 
 
@@ -41,167 +41,90 @@ Due to the rising seasonal epidemic of the WNV in Chicago, an increasing number 
 
 ------
 ## Data Dictionary
-#### Dataset name: train 
+
+#### train.csv, test.csv
 ##### This contains data provided by source to be used in the project.
-|Feature|Type|Description|
-|---|---|---|
-|Date|Object|Date that the WNV test was performed|
-|Address|Object|Approximate address of the location of the trap|
-|Species|Object|The species of the mosquitoes found in trap|
-|Block|Int|Bloack number of the address|
-|Street|Object|Street name|
-|Trap|Object|ID of the trap|
-|AddressNumberAndStreet|Object|Approximate address of the location of trap|
-|Latitude||Float|Latitude of trap|
-|Longitude|Float|Longitude of trap|
-|AddressAccuracy|Int|Accuracy of the address|
-|NumMosquitos|Int|Number of mosquitoes caught in trap|
-|WnvPresent|Int|Whether the WNV was present in the mosquitoes caught in trap. 1 indicates WNV is present. 0 indicates WNV is not present|
+* The train set consists of data from 2007, 2009, 2011, and 2013
+* The test set consists of data from 2008, 2010, 2012 and 2014 (without data on NumMosquitos and WnvPresent)
 
-#### Dataset name: test 
-##### This contains data provided by source to be used in the Kaggle challenge.
-|Feature|Type|Description|
-|---|---|---|
-|Date|Object|Date that the WNV test was performed|
-|Address|Object|Approximate address of the location of the trap|
-|Species|Object|The species of the mosquitoes found in trap|
-|Block|Int|Bloack number of the address|
-|Street|Object|Street name|
-|Trap|Object|ID of the trap|
-|AddressNumberAndStreet|Object|Approximate address of the location of trap|
-|Latitude||Float|Latitude of trap|
-|Longitude|Float|Longitude of trap|
-|AddressAccuracy|Int|Accuracy of the address|
 
-#### Dataset name: spray
+---
+| Feature | Data Type | Description |
+| :--- | :--- | :--- 
+| **Date**| *object* | Date that the WNV test is performed |
+| **Address** | *object* | Approximate address of the location of trap. This is used to send to the GeoCoder. |
+| **Species** | *object* | The species of mosquitos |
+| **Block** | *int* | Block number of address |
+| **Street** | *object* | Street name |
+| **Trap** | *object* | Id of the trap |
+| **AddressNumberAndStreet** | *object* | Approximate address returned from GeoCoder |
+| **Latitude** | *float* | Latitude returned from GeoCoder |
+| **Longitude** | *float* | Longitude returned from GeoCoder |
+| **AddressAccuracy** | *int* | Accuracy returned from GeoCoder |
+| **NumMosquitos** | *int* | Number of mosquitoes caught in this trap |
+| **WnvPresent** | *int* | Whether West Nile Virus was present in these mosquitos. 1 means WNV is present, and 0 means not present. |
+
+---
+#### spray.csv, spray_clean.csv
 ##### This contains data of spraying of pesticides conducted by the City of Chicago.
-|Feature|Type|Description|
-|---|---|---|
-|Date|Object|Date the spraying was conducted|
-|Time|Object|Time of the spraying|
-|Latitude|Int|Latitude of the location of spraying|
-|Longitude|Int|Longitude of the location of spraying|
+* GIS data of spraying efforts in 2011 and 2013
 
-#### Dataset name: weather 
+---
+| Feature | Data Type | Description |
+| :--- | :--- | :--- 
+| **Date** | *object* | The date of the spray |
+| **Time** | *object* | The time of the spray |
+| **Latitude** | *float* | Latitude of the spray |
+| **Longitude** | *float* | Longitude of the spray |
+
+---
+#### weather.csv, weather_clean.csv
 ##### This contains data of the weather conditions of the City of Chicago.
+* Weather data from 2007 to 2014. Column descriptions in noaa_weather_qclcd_documentation.pdf saved in document folder.
+
+---
 |Feature|Type|Description|
 |---|---|---|
-|Station|Int|The station that the weather was recorded from|
-|Date|Object|Date the weather was recorded|
-|Tmax|Int|Highest temperature recorded|
-|Tmin|Int|Lowest temperature recorded|
-|Tavg|Object|Average temperature recorded|
-|Depart|Object|Difference in temperature from normal point|
-|DewPoint|Int|Temperature for air to be cooled to become water vapour|
-|WetBulb|Object|Temperature of adiabatic saturation|
-|Heat|Object|Difference in temperature from 65F (Season begins July)| 
-|Cool|Object|Difference in temperature from 65F (Season begins January)|
-|Sunrise|Object|Time of sunrise|
-|Sunset|Object|Time of sunset|
-|CodeSum|Object|Weather condition recorded|
-|Depth|Object|Depth of snowfall recorded (inches)|
-|Water1|Object|Water equivalent|
-|SnowFall|Object|Amount of snowfall recorded|
-|PrecipTotal|Object|Amount of precipitation recorded|
-|StnPressure|Object|Average station pressure|
-|SeaLevel|Object|Average sea level pressure|
-|ResultSpeed|Float|Resultant wind speed|
-|ResultDir|Int|Resultant wind direction|
-|AvgSpeed|Object|Average wind speed|
+|**Station**|*int*|The station that the weather was recorded from|
+|**Date**|*object*|Date the weather was recorded|
+|**Tmax**|*int*|Highest temperature recorded|
+|**Tmin**|*int*|Lowest temperature recorded|
+|**Tavg**|*object*|Average temperature recorded|
+|**Depart**|*object*|Difference in temperature from normal point|
+|**DewPoint**|*int*|Temperature for air to be cooled to become water vapour|
+|**WetBulb**|*object*|Temperature of adiabatic saturation|
+|**Heat**|*object*|Difference in temperature from 65F (Season begins July)| 
+|**Cool**|*object*|Difference in temperature from 65F (Season begins January)|
+|**Sunrise**|*object|Time of sunrise|
+|**Sunset**|*object*|Time of sunset|
+|**CodeSum**|*object*|Weather condition recorded|
+|**Depth**|*object*|Depth of snowfall recorded (inches)|
+|**Water1**|*object*|Water equivalent|
+|**SnowFall**|*object*|Amount of snowfall recorded|
+|**PrecipTotal**|*object*|Amount of precipitation recorded|
+|**StnPressure**|*object*|Average station pressure|
+|**SeaLevel**|*object*|Average sea level pressure|
+|**ResultSpeed**|*float*|Resultant wind speed|
+|**ResultDir**|*int*|Resultant wind direction|
+|**AvgSpeed**|*object*|Average wind speed|
 
-#### Dataset name: spray_clean
-##### This contains the cleaned spray data.
+---
+#### trap_trn_weather_sel_feat.csv, trap_test_weather_sel_feat.csv
+##### Data features used in modelling
 |Feature|Type|Description|
 |---|---|---|
-|Date|Object|Date the spraying was conducted|
-|Time|Object|Time of the spraying|
-|Latitude|Int|Latitude of the location of spraying|
-|Longitude|Int|Longitude of the location of spraying|
-
-#### Dataset name: train_df 
-##### This contains cleaned weather and train data merged together.
-|Feature|Type|Description|
-|---|---|---|
-|Date|Object|Data merged on Date column|
-|Station|Int|The station that the weather was recorded from|
-|Tmax|Int|Highest temperature recorded|
-|Tmin|Int|Lowest temperature recorded|
-|Tavg|Int|Average temperature recorded|
-|Depart|Object|Difference in temperature from normal point|
-|DewPoint|Int|Temperature for air to be cooled to become water vapour|
-|WetBulb|Int|Temperature of adiabatic saturation|
-|Heat|Int|Difference in temperature from 65F (Season begins July)| 
-|Cool|Int|Difference in temperature from 65F (Season begins January)|
-|Sunrise|Object|Time of sunrise|
-|Sunset|Object|Time of sunset|
-|CodeSum|Object|Weather condition recorded|
-|PrecipTotal|Float|Amount of precipitation recorded|
-|StnPressure|Float|Average station pressure|
-|SeaLevel|Float|Average sea level pressure|
-|ResultSpeed|Float|Resultant wind speed|
-|ResultDir|Int|Resultant wind direction|
-|AvgSpeed|Float|Average wind speed|
-|Address|Object|Approximate address of the location of the trap|
-|Species|Object|The species of the mosquitoes found in trap|
-|Block|Int|Bloack number of the address|
-|Street|Object|Street name|
-|Trap|Object|ID of the trap|
-|AddressNumberAndStreet|Object|Approximate address of the location of trap|
-|Latitude||Float|Latitude of trap|
-|Longitude|Float|Longitude of trap|
-|AddressAccuracy|Int|Accuracy of the address|
-|NumMosquitos|Int|Number of mosquitoes caught in trap|
-|WnvPresent|Int|Whether the WNV was present in the mosquitoes caught in trap. 1 indicates WNV is present. 0 indicates WNV is not present|
-
-#### Dataset name: test_df 
-##### This contains cleaned weather and test data merged together.
-|Feature|Type|Description|
-|---|---|---|
-|Date|Object|Data merged on Date column|
-|Station|Int|The station that the weather was recorded from|
-|Tmax|Int|Highest temperature recorded|
-|Tmin|Int|Lowest temperature recorded|
-|Tavg|Int|Average temperature recorded|
-|Depart|Object|Difference in temperature from normal point|
-|DewPoint|Int|Temperature for air to be cooled to become water vapour|
-|WetBulb|Int|Temperature of adiabatic saturation|
-|Heat|Int|Difference in temperature from 65F (Season begins July)| 
-|Cool|Int|Difference in temperature from 65F (Season begins January)|
-|Sunrise|Object|Time of sunrise|
-|Sunset|Object|Time of sunset|
-|CodeSum|Object|Weather condition recorded|
-|PrecipTotal|Float|Amount of precipitation recorded|
-|StnPressure|Float|Average station pressure|
-|SeaLevel|Float|Average sea level pressure|
-|ResultSpeed|Float|Resultant wind speed|
-|ResultDir|Int|Resultant wind direction|
-|AvgSpeed|Float|Average wind speed|
-|Address|Object|Approximate address of the location of the trap|
-|Species|Object|The species of the mosquitoes found in trap|
-|Block|Int|Bloack number of the address|
-|Street|Object|Street name|
-|Trap|Object|ID of the trap|
-|AddressNumberAndStreet|Object|Approximate address of the location of trap|
-|Latitude||Float|Latitude of trap|
-|Longitude|Float|Longitude of trap|
-|AddressAccuracy|Int|Accuracy of the address|
-
-
-#### Data features used in modelling
-|Feature|Type|Dataset|Description|
-|---|---|---|---|
-|Address_w|Float|trap_trn_weather_full|The weight assigned to address location based on the likelihood of wnv|
-|Month_w|Float|trap_trn_weather_full|The weight assigned to month based on the likelihood of wnv|
-|Species_w|Float|trap_trn_weather_full|The weight assigned to mosquito species based on the likelihood of wnv|
-|DewPoint_14daysavg|Float|trap_trn_weather_full|The average DewPoint temperature of the past 14 days (units in Fahrenheit)|
-|WetBulb_14daysavg|Float|trap_trn_weather_full|The average WetBulb temperature of the past 14 days (units in Fahrenheit)|
-|Tavg_14daysavg|Float|trap_trn_weather_full|The average daily temperature of the past 14 days (units in Fahrenheit)|
-|Cool_14daysavg|Float|trap_trn_weather_full|The average cooling temperature of the past 14 days (units in Fahrenheit)|
-|ResultSpeed_14daysavg|Float|trap_trn_weather_full|The average resultant wind speed of the past 14 days (units in MPH)|
-|AvgSpeed_14daysavg|Float|trap_trn_weather_full|The average daily wind speed of the past 14 days (units in MPH)|
-|PrecipTotal_14daysavg|Float|trap_trn_weather_full|The average of the total precipitation of the past 14 days (units in inches)|
-|r_humidity_14daysavg|Float|trap_trn_weather_full|The average relative humidity of the past 14 days (units in percentage)|
-|WnvPresent|Int|trap_trn_weather_full|Label for presence of west nile virus in mosquito (0 indicates the absence of wvn and 1 indicates the presence of wnv)|
+|**Address_w**|*float*|The weight assigned to address location based on the likelihood of wnv|
+|**Month_w**|*float*|The weight assigned to month based on the likelihood of wnv|
+|**Species_w**|*float*|The weight assigned to mosquito species based on the likelihood of wnv|
+|**DewPoint_14daysavg**|*float*|The average DewPoint temperature of the past 14 days (units in Fahrenheit)|
+|**WetBulb_14daysavg**|*float*|The average WetBulb temperature of the past 14 days (units in Fahrenheit)|
+|**Tavg_14daysavg**|*float*|The average daily temperature of the past 14 days (units in Fahrenheit)|
+|**Cool_14daysavg**|*float*|The average cooling temperature of the past 14 days (units in Fahrenheit)|
+|**ResultSpeed_14daysavg**|*float*|The average resultant wind speed of the past 14 days (units in MPH)|
+|**AvgSpeed_14daysavg**|*float*|The average daily wind speed of the past 14 days (units in MPH)|
+|**PrecipTotal_14daysavg**|*float*|The average of the total precipitation of the past 14 days (units in inches)|
+|**r_humidity_14daysavg**|*float*|The average relative humidity of the past 14 days (units in percentage)|
+| **WnvPresent** | *int* | Whether West Nile Virus was present in these mosquitos. 1 means WNV is present, and 0 means not present. |
 
 
 ------
